@@ -13,7 +13,7 @@ module.exports = {
        let commit_messages = ""
 
         const commits = await axios({
-            url: "https://api.github.com/repos/uh-Sid/SentinelJS/commits",
+            url: "https://api.github.com/repos/Aspect-for-Discord/Aspect/commits",
             headers : {
                 Accept: "application/vnd.github.v3+json"
             }
@@ -25,10 +25,15 @@ module.exports = {
 
             const sha = commit.sha.substring(0, 5)
 
-            commit_messages += `[\`${sha}\`](https://github.com/TheUntraceable/SentinelJS/commit/${commit.sha}) - ${commit.commit.message} (${time(Math.floor(new Date(commit.commit.author.date).getTime() / 1000), "R")})\n`
+            commit_messages += `[\`${sha}\`](https://github.com/Aspect-for-Discord/Aspect/commit/${commit.sha}) - ${commit.commit.message} (${time(Math.floor(new Date(commit.commit.author.date).getTime() / 1000), "R")})\n`
         }
 
         const embed = new MessageEmbed().setTitle("Bot stats").setColor("#2F3136").setDescription("This embed will contain stats regarding me.").addFields([
+           {
+                name: "Recent changes: ",
+                value: commit_messages || "Error, if this happens go yell at Sidd_ in the support server (try `/links`)",
+                inline: false
+            },
             {
                 name : "Uptime: ",
                 value: `<t:${Math.round(interaction.client.readyTimestamp / 1000)}:R>.`,
