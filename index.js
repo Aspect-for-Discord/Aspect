@@ -31,9 +31,10 @@ for (const file of commandFiles) {
 
 client.once('ready', async () => {
 	console.log('Ready!');
-   client.user.setActivity("/help | Coded by Sidd_#4553", {
+   client.user.setActivity(`/help`, {
   type: "LISTENING",
 });
+
 
 });
 

@@ -1,197 +1,89 @@
-//const discordTogether = require('../modules/activities.js')
+const messages = require("../messages.json")
 const Discord = require('discord.js');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 module.exports = {
-    name: "activity",
-    description: "Watch YouTube with friends, play chess, doodle, betryal.io and so many more games!",
+  name: "activity",
+  description: "Watch YouTube with friends, play chess, doodle, betryal.io and so many more games!",
 
-    data: new SlashCommandBuilder()
-        .setName('activity')
-        .setDescription('Watch YouTube with friends, play chess, doodle, betryal.io and so many more games! Only 💻.')
-        .addChannelOption(option => 
-                    option.setName('channel')
-                    .setDescription('Where to play? SELECT A VOICE CHANNEL')
-                    .setRequired(true))
-        .addStringOption(option =>
-            option.setName('activity')
-            .setDescription('What to play?')
-            .setRequired(true)
-            .addChoice('YouTube Together', 'youtube')
-            .addChoice('Poker', 'poker')
-            .addChoice('betrayal.io', 'betrayal')
-            .addChoice('Fishington', 'fishy')
-            .addChoice('Letter Tile', 'letter')
-            .addChoice('Words Snack', 'snack')
-            .addChoice('Doodle Crew', 'doodle')
-            .addChoice('SpellCast', 'spell')
-            .addChoice('Awkword', 'awk')
-            .addChoice('chess', 'chess')),
+  data: new SlashCommandBuilder()
+    .setName('activity')
+    .setDescription('Watch YouTube with friends, play chess, doodle, betryal.io and so many more games! Only 💻.')
+    .addChannelOption(option =>
+      option.setName('channel')
+        .setDescription('Where to play? SELECT A VOICE CHANNEL')
+        .setRequired(true))
+    .addStringOption(option =>
+      option.setName('activity')
+        .setDescription('What to play?')
+        .setRequired(true)
+        .addChoice('YouTube Together', 'youtube')
+        .addChoice('Poker', 'poker')
+        .addChoice('betrayal.io', 'betrayal')
+        .addChoice('Fishington', 'fishing')
+        .addChoice('Letter Tile', 'lettertile')
+        .addChoice('Words Snack', 'wordsnack')
+        .addChoice('Doodle Crew', 'doodlecrew')
+        .addChoice('SpellCast', 'spellcast')
+        .addChoice('Awkword', 'awkword')
+                .addChoice('Checkers', 'checkers')
 
-
-    async execute(interaction, client) {
-
-        const choice = interaction.options.getString('activity');
-const channel = interaction.options.getChannel('channel').id;
-        
-        
-        if (choice === "betrayal") {
-                client.discordTogether.createTogetherCode(channel, 'betrayal').then(async invite => {
-                    const betrayal = new Discord.MessageEmbed()
-                        .setTitle('Betrayal.io')
-                        .setColor(require('../messages.json').embed_color)
-                        .setTimestamp()
-                        .setDescription(`Are u the imposter :eyes:? **[${require('../messages.json').activity_clickhere}](${invite.code})**`)
-                    return interaction.reply({
-                        embeds: [betrayal]
-                    });
+        .addChoice('Chess', 'chess')),
 
 
-                });
-            };
-        
+  async execute(interaction, client) {
 
-        if (choice === "poker") {
-                client.discordTogether.createTogetherCode(channel, 'poker').then(async invite => {
-                    const betrayal = new Discord.MessageEmbed()
-                        .setTitle('Poker')
-                        .setColor(require('../messages.json').embed_color)
-                        .setTimestamp()
-                        .setDescription(`Get your money and **[${require('../messages.json').activity_clickhere}](${invite.code})!**`)
-                    return interaction.reply({
-                        embeds: [betrayal]
-                    });
+    const choice = interaction.options.getString('activity');
+    const channel = interaction.options.getChannel('channel').id;
+    let game = ''
+    let msg = ''
 
 
-                });
-            };
+    if (choice === "betrayal") {
+msg='Are u the imposter :eyes:?'
 
-        if (choice === "youtube") {
-                client.discordTogether.createTogetherCode(channel, 'youtube').then(async invite => {
-                    const betrayal = new Discord.MessageEmbed()
-                        .setTitle('YouTube Together')
-                        .setColor(require('../messages.json').embed_color)
-                        .setTimestamp()
-                        .setDescription(`Get the party started and **[${require('../messages.json').activity_clickhere}](${invite.code})!**`)
-                    return interaction.reply({
-                        embeds: [betrayal]
-                    });
+    } else     if (choice === "youtube") {
+msg='YouTube is the biggest video streaming platform in the world.'
 
+    }  else  if (choice === "chess") {
+msg='A1 to B3. Wait, no. I mean yeah. No... UGH!!!!'
 
-                });
-            };
-        
+    }  else  if (choice === "checkers") {
+msg='My grandma is good at this one :D'
 
-        if (choice === "chess") {
-                client.discordTogether.createTogetherCode(channel, 'chess').then(async invite => {
-                    const betrayal = new Discord.MessageEmbed()
-                        .setTitle('Chess in da Park')
-                        .setColor(require('../messages.json').embed_color)
-                        .setTimestamp()
-                        .setDescription(`Are you good at chess? **[${require('../messages.json').activity_clickhere}](${invite.code})!**`)
-                    return interaction.reply({
-                        embeds: [betrayal]
-                    });
+    }  else  if (choice === "fishing") {
+msg=':tropical_fish:   :fish:  :blowfish:   :fishing_pole_and_fish: '
 
+    } else if (choice === "lettertile") {
+msg='I\'m good at this one :)'
 
-                });
-            };
-        
+    } else     if (choice === "wordsnack") {
+msg='Save a snack for me?'
 
-        if (choice === "fishy") {
-                client.discordTogether.createTogetherCode(channel, 'fishing').then(async invite => {
-                    const betrayal = new Discord.MessageEmbed()
-                        .setTitle('Fishington')
-                        .setColor(require('../messages.json').embed_color)
-                        .setTimestamp()
-                        .setDescription(`Save me some fish please! **[${require('../messages.json').activity_clickhere}](${invite.code})!**`)
-                    return interaction.reply({
-                        embeds: [betrayal]
-                    });
+    } else     if (choice === "doodlecrew") {
+msg='Ready? Set. Draw!'
 
+    } else     if (choice === "spellcast") {
+msg='Spells galore =>'
 
-                });
-            };
-        
+    } else     if (choice === "awkword") {
+msg='GOGOGOGOGO, and dont make it awkward (get it?)!'
 
-        if (choice === "letter") {
-                client.discordTogether.createTogetherCode(channel, 'lettertile').then(async invite => {
-                    const betrayal = new Discord.MessageEmbed()
-                        .setTitle('Letter Tile')
-                        .setColor(require('../messages.json').embed_color)
-                        .setTimestamp()
-                        .setDescription(`Letters, letters. **[${require('../messages.json').activity_clickhere}](${invite.code})!**`)
-                    return interaction.reply({
-                        embeds: [betrayal]
-                    });
+    } else     if (choice === "puttparty") {
+msg='This is so new we dont even know what to put here'
+
+    }
+
+    client.discordTogether.createTogetherCode(channel, choice).then(async invite => {
+      const invitee = new Discord.MessageEmbed()
+        .setTitle("Alright! Let's get the part started! 🎉")
+        .setColor("BLACK")
+        .setTimestamp()
+        .setDescription(`${msg} **[${require('../messages.json').activity_clickhere}](${invite.code})!**`)
+      return interaction.reply({
+        embeds: [invitee]
+      });
 
 
-                });
-            };
-        
-
-        if (choice === "snack") {
-                client.discordTogether.createTogetherCode(channel, 'wordsnack').then(async invite => {
-                    const betrayal = new Discord.MessageEmbed()
-                        .setTitle('Words Snack')
-                        .setColor(require('../messages.json').embed_color)
-                        .setTimestamp()
-                        .setDescription(`Yum! **[${require('../messages.json').activity_clickhere}](${invite.code})!**`)
-                    return interaction.reply({
-                        embeds: [betrayal]
-                    });
-
-
-                });
-            };
-        
-
-        if (choice === "doodle") {
-                client.discordTogether.createTogetherCode(channel, 'doodlecrew').then(async invite => {
-                    const betrayal = new Discord.MessageEmbed()
-                        .setTitle('Doodle Crew')
-                        .setColor(require('../messages.json').embed_color)
-                        .setTimestamp()
-                        .setDescription(`Ready? Set. Draw! **[${require('../messages.json').activity_clickhere}](${invite.code})!**`)
-                    return interaction.reply({
-                        embeds: [betrayal]
-                    });
-
-
-                });
-            };
-        
-
-        if (choice === "spell") {
-                client.discordTogether.createTogetherCode(channel, 'spellcast').then(async invite => {
-                    const betrayal = new Discord.MessageEmbed()
-                        .setTitle('Spell Cast')
-                        .setColor(require('../messages.json').embed_color)
-                        .setTimestamp()
-                        .setDescription(`Spells galore => **[${require('../messages.json').activity_clickhere}](${invite.code})!**`)
-                    return interaction.reply({
-                        embeds: [betrayal]
-                    });
-
-
-                });
-            };
-        
-
-        if (choice === "awk") {
-                client.discordTogether.createTogetherCode(channel, 'awkword').then(async invite => {
-                    const betrayal = new Discord.MessageEmbed()
-                        .setTitle('Awkword')
-                        .setColor(require('../messages.json').embed_color)
-                        .setTimestamp()
-                        .setDescription(`Start already! **[${require('../messages.json').activity_clickhere}](${invite.code})!**`)
-                    return interaction.reply({
-                        embeds: [betrayal]
-                    });
-
-
-                });
-            };
-
-    },
-
-};
+    })
+  }
+}

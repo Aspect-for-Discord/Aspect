@@ -33,7 +33,7 @@ module.exports = {
 		} else if(choice === "mask") {
 			url = "https://api.weky.xyz/canvas/mask?image="
 		} else if(choice === "worship") {
-			url = "https://api.weky.xyz/canvas/worship?image="
+			url = "https://api.weky.xyz/canvas/pray?image="
 		}  else if(choice === "rifle") {
 			url = "https://api.weky.xyz/canvas/gun?rifle="
 		} else if(choice === "robert") {
