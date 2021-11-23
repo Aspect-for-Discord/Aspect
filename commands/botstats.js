@@ -50,11 +50,13 @@ module.exports = {
                 name: "Guilds: ",
                 value: `I can see ${interaction.client.guilds.cache.size} guild(s).`,
                 inline: true
-            },{
-                name: "Users: ",
-                value: `I can see ${interaction.client.users.cache.size} user(s) in my cache. Run a command to add yourself to it!`,
-                inline: true
-            },{
+            },
+            //{
+             //   name: "Users: ",
+               // value: `I can see ${interaction.client.users.cache.size} user(s) in my cache. Run a command to add yourself to it!`,
+           //     inline: true
+           // },
+            {
                 name: "Version: ",
                 value: `I am in version ${require("../config.json").version}`,
                 inline: true
