@@ -30,7 +30,7 @@ module.exports = {
 
         const embed = new MessageEmbed().setTitle("Bot stats").setColor("#2F3136").setDescription("This embed will contain stats regarding me.").addFields([
            {
-                name: "Recent changes: ",
+                name: "Recent additions and removals: ",
                 value: commit_messages || "Error, if this happens go yell at Sidd_ in the support server (try `/links`)",
                 inline: false
             },
