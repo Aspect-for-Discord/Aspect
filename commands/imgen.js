@@ -35,7 +35,7 @@ module.exports = {
 		} else if(choice === "worship") {
 			url = "https://api.weky.xyz/canvas/pray?image="
 		}  else if(choice === "rifle") {
-			url = "https://api.weky.xyz/canvas/gun?rifle="
+			url = "https://api.weky.xyz/canvas/rifleshoot?image="
 		} else if(choice === "robert") {
 			url = "https://api.weky.xyz/canvas/robert?image="
 		};

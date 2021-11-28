@@ -1,5 +1,8 @@
 const { blackjack, rps, slotMachine, connectFour } = require('discord.js-games');
 
+const wait = require('util').promisify(setTimeout);
+
+
 const { SlashCommandBuilder } = require('@discordjs/builders');
 
 
@@ -47,7 +50,7 @@ await slotMachine({
   embed: {
     winMessage: "yay! u won! You are extremely lucky to have won. Trust me.",
     loseMessage: "ha loser, u lost lol",
-    descriptionMesage: "Possible emojis:\n :grin:, :smile:, :slight_smile:, :smirk:, :ok_hand:"
+    footer: "There are 5 possible emojis, meaning that you have a 0.022% chance of winning",
   
 }
 
@@ -60,12 +63,12 @@ const opponent = interaction.options.getUser('user');
 		if(!opponent) return interaction.reply('Use the user option please');
 
 		const positions = {
-			three: '_ _        :levitate: :point_right:      **3**        :point_left: :levitate:',
-			two: '_ _        :levitate: :point_right:      **2**        :point_left: :levitate:',
-			one: '_ _        :levitate: :point_right:      **1**        :point_left: :levitate:',
-			go: '_ _        :levitate: :point_right:      **GO!**        :point_left: :levitate:',
-			ended1: '_ _     :levitate: :point_right:      **STOP!**        :skull_crossbones: :levitate:',
-			ended2: '_ _     :levitate: :skull_crossbones:      **STOP!**        :point_left: :levitate:',
+			three: '_ _        :levitate: <:gun_right:912806612434030652>        **3**        <:gun_left:912806612379508788>   :levitate:',
+			two: '_ _        :levitate: <:gun_right:912806612434030652>        **2**        <:gun_left:912806612379508788>   :levitate:',
+			one: '_ _        :levitate: <:gun_right:912806612434030652>        **1**        <:gun_left:912806612379508788>   :levitate:',
+			go: '_ _        :levitate: <:gun_right:912806612434030652>        **GO!**        <:gun_left:912806612379508788>   :levitate:',
+			ended1: '_ _     :levitate: <:gun_right:912806612434030652>      **STOP!**        :skull_crossbones: :levitate:',
+			ended2: '_ _     :levitate: :skull_crossbones:      **STOP!**        <:gun_left:912806612379508788>   :levitate:',
 		};
 
 		const componentsArray = [
@@ -79,24 +82,13 @@ const opponent = interaction.options.getUser('user');
 						style: 'PRIMARY',
 						disabled: true,
 					},
-					{
-						type: 2,
-						label: '\u200b',
-						custom_id: 'id lol useless',
-						style: 'SECONDARY',
-						disabled: true,
-					},
-					{
-						type: 2,
-						label: 'Shoot!',
-						custom_id: 'shoot2',
-						style: 'DANGER',
-						disabled: true,
-					},
+
 				],
 			},
 		];
-interaction.reply('Game started! May the fastest win!')
+interaction.reply('Starting game...')
+		await wait(1000);
+
 		const msg = await interaction.channel.send({
 			content: positions.three,
 			components: componentsArray,
@@ -117,7 +109,6 @@ interaction.reply('Game started! May the fastest win!')
 			}, 2000);
 			setTimeout(() => {
 				componentsArray[0].components[0].disabled = false;
-				componentsArray[0].components[2].disabled = false;
 				msg.edit({
 					content: positions.go,
 					components: componentsArray,
@@ -133,7 +124,6 @@ interaction.reply('Game started! May the fastest win!')
 		const button = await msg.awaitMessageComponent({ filter: filter, componentType: 'BUTTON', max: 1 });
 
 		componentsArray[0].components[0].disabled = true;
-		componentsArray[0].components[2].disabled = true;
 
 		if(button.customId === 'shoot1' && button.user.id == interaction.user.id) {
 			msg.edit({
@@ -142,9 +132,9 @@ interaction.reply('Game started! May the fastest win!')
 			});
 			return button.reply({ content: `<@${interaction.user.id}> won!` });
 		}
-		else if(button.customId === 'shoot2' && button.user.id == opponent.id) {
+		else if(button.customId === 'shoot1' && button.user.id == opponent.id) {
 			msg.edit({
-				content: positions.ended1,
+				content: positions.ended2,
 				components: componentsArray,
 			});
 			return button.reply({ content: `<@${opponent.id}> won!` });
@@ -186,7 +176,8 @@ interaction.reply('Game started! May the fastest win!')
 				],
 			},
 		];
-interaction.reply('Started! Beat me, I dare you :sunglasses:')
+    interaction.reply('Starting game...')
+		await wait(2000);
 		const msg = await interaction.channel.send({
 			content: randomPos,
 			components: componentsArray,
@@ -202,7 +193,7 @@ interaction.reply('Started! Beat me, I dare you :sunglasses:')
 		}
 		setInterval(() => {
 			if(gameEnded == false) return update();
-		}, 1000);
+		}, 500);
 
 		const filter = button => {
 			return button.user.id === interaction.user.id;
@@ -257,8 +248,9 @@ interaction.reply('Started! Beat me, I dare you :sunglasses:')
 				],
 			},
 		];
-interaction.reply('Game started')
-		const msg = await interaction.channel.send({
+    interaction.reply('Starting game...')
+		await wait(1000);
+    		const msg = await interaction.channel.send({
 			content: positions.first + '\n' + positions.second.join('') + '\n' + positions.third.join('') + '\n' + positions.fourth,
 			components: componentsArray,
 		});
@@ -275,7 +267,7 @@ interaction.reply('Game started')
 				componentsArray[0].components[0].disabled = true;
 				componentsArray[0].components[1].disabled = true;
 
-				interaction.channel.send(`gg ${who.username} won`);
+				msg.reply(`GG <@${who.id}> won!`);
 			}
 
 			msg.edit({

@@ -27,8 +27,8 @@ module.exports = {
 
         let helpEmbed = new MessageEmbed()
         .setTitle(`Help for **\`${cmd.name}\`**`)
-        .addField("Name", `\`${cmd.name}\``, true)
-        .addField("Description", `\`${description}\``, true)
+        .addField("Name", `\`${cmd.name}\``)
+        .addField("Description", `<:reply_2:913499032020713492> \`${description}\``)
         .setColor("GREEN")
 
         return interaction.reply({ embeds: [helpEmbed], ephemeral: true });
@@ -41,9 +41,10 @@ module.exports = {
     .setTitle('Help Menu')
     .setDescription('Commands:')
         .setColor("GREEN")
+        .setFooter('Run /help <command_name> for more info on a command!')
 
     cmd.forEach(cmd => {
-    helpEmbed.addField(`**\`${cmd.name}\`**`, `\`${cmd.description}\``)
+    helpEmbed.addField(`${cmd.name}`, `<:reply_2:913499032020713492>\`${cmd.description}\``)
 })
 
     interaction.reply({ embeds: [helpEmbed] })
