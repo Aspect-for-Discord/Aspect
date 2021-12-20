@@ -59,7 +59,7 @@ client.on('interactionCreate', async interaction => {
 					.setStyle('LINK')
                 	.setURL('https://discord.gg/Fkjgn8WsyH'),
         );
-		return interaction.reply({ content: 'There was an error while executing this command!\n If you want, you can send the following error to our support server.\n``` js '+ error + '```', ephemeral: true, components: [join] });
+		return interaction.reply({ content: 'There was an error while executing this command!\n If you want, you can send the following error to our support server.\n```js\n'+ error + '```', ephemeral: true, components: [join] });
 	}
     
 });
