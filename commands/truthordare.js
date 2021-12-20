@@ -30,17 +30,16 @@ let truth = [
       "When did you start liking your crush",
       "Have you ever spoken to your crush",
     ];
-
+ let Result = truth[Math.floor(Math.random() * truth.length)];
 const truthEmbed = new MessageEmbed()
 .setTitle('Truth...')
 .setDescription("You selected the option `TRUTH` " 
 
-"Truth: " + truth)
+"Truth: " + Result)
 .setColor('RANDOM')
-return await interaction.reply({embeds: [economyEmbed]})
+return await interaction.reply({embeds: [truthEmbed]})
 
 } else if (choice === "dare") {
-
 let dare = [
       "Read a 600 page book",
       "Tell a random guy u love them",
@@ -52,12 +51,12 @@ let dare = [
       "Buy a burger",
       "Eat KFC",
     ];
-
+ let Result = dare[Math.floor(Math.random() * dare.length)];
 const dareEmbed = new MessageEmbed()
 .setTitle('Misc Commands')
 .setDescription("You selected the option `DARE` "
 
-+ "Dare: " dare)
++ "Dare: " Result)
 .setColor('RANDOM')
 return await interaction.reply({embeds: [dareEmbed]})
 } 
