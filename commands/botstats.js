@@ -19,7 +19,7 @@ module.exports = {
             }
         })
     
-        commits.data.splice(3) // This will only get the last 3 commits
+        commits.data.splice(5) // This will only get the last 3 commits
 
         for(commit of commits.data) {
 
@@ -50,12 +50,11 @@ module.exports = {
                 name: "Guilds: ",
                 value: `I can see ${interaction.client.guilds.cache.size} guild(s).`,
                 inline: true
+            },{
+                name: "Users: ",
+              value: `I can see ${interaction.client.users.cache.size} user(s) in my cache. Run a command to add yourself to it!`,
+                inline: true
             },
-            //{
-             //   name: "Users: ",
-               // value: `I can see ${interaction.client.users.cache.size} user(s) in my cache. Run a command to add yourself to it!`,
-           //     inline: true
-           // },
             {
                 name: "Version: ",
                 value: `I am in version ${require("../config.json").version}`,

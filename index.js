@@ -34,7 +34,7 @@ client.once('ready', async () => {
    client.user.setActivity(`/help`, {
   type: "LISTENING",
 });
-
+    
 
 });
 
